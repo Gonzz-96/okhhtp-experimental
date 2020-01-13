@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import okhttp3.*
 import java.io.IOException
 
-fun main() {
+suspend fun main() {
 
     printThreadName()
 
@@ -14,17 +14,9 @@ fun main() {
         .get()
         .build()
 
-    val response = client.newCall(request).enqueue(object : Callback {
-        override fun onFailure(call: Call, e: IOException) {
-            // no-op
-        }
+    val response = client.newCall(request).execute().body?.string()
 
-        override fun onResponse(call: Call, response: Response) {
-            printThreadName()
-            val myPokemon = Gson().fromJson(response.body?.string(), Pokemon::class.java)
-            print("\n$myPokemon")
-        }
-    })
+    print(response)
 }
 
 fun printThreadName() {
