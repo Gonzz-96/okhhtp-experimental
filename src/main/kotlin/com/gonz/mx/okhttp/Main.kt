@@ -32,5 +32,25 @@ fun printThreadName() {
 }
 
 data class Pokemon(
-    val name: String
+    val name: String,
+    val abilities: List<Ability>,
+    val base_experience: Int,
+    val forms: List<Form>,
+    val id: Int
+)
+
+data class Ability(
+    val ability: AbilityDetails,
+    val is_hidden: Boolean,
+    val slot: Int
+)
+
+data class AbilityDetails(
+    val name: String,
+    val url: String
+)
+
+data class Form(
+    val name: String,
+    val url: String
 )
